@@ -17,7 +17,7 @@ function Contact() {
   async function submit(e) {
     e.preventDefault(); setState('loading'); setError('')
     const form = Object.fromEntries(new FormData(e.currentTarget))
-    try { const r = await fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api'}/contact/`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(form)}); if(!r.ok) throw new Error(); setState('success'); e.currentTarget.reset() }
+    try { const r = await fetch(`${import.meta.env.VITE_API_URL || 'https://portfolio-2-d45e.onrender.com/api'}/contact/`, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(form)}); if(!r.ok) throw new Error(); setState('success'); e.currentTarget.reset() }
     catch { setError('Could not send right now. Please email me directly.'); setState('idle') }
   }
   return <section id="contact" className="contact section"><div><p className="eyebrow">LET’S BUILD SOMETHING</p><h2>Have a project<br/>in mind?</h2><p className="lede">Tell me about it. I’m open to full-time roles, freelance work and thoughtful collaborations.</p><a className="email" href="mailto:haqueh856@gmail.com">haqueh856@gmail.com <Arrow /></a><p className="place">Bogura, Bangladesh</p></div><form onSubmit={submit}><label>Name<input required name="name" placeholder="Your name" /></label><label>Email<input required type="email" name="email" placeholder="you@company.com" /></label><label>Project type<select required name="project_type" defaultValue=""><option value="" disabled>Select an option</option><option>Full-stack application</option><option>Backend & API</option><option>React frontend</option><option>Job opportunity</option></select></label><label>Message<textarea required name="message" placeholder="A little about the project, timeline and goals." rows="4" /></label>{error && <p className="form-error" role="alert">{error}</p>}{state==='success' && <p className="form-success">Thank you — your message has been received.</p>}<button className="button" disabled={state==='loading'}>{state==='loading'?'Sending…':'Send inquiry'} <Arrow /></button></form></section>
@@ -26,7 +26,7 @@ function Contact() {
 export default function App() {
   const [portfolioProjects, setPortfolioProjects] = useState(projects)
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api'}/projects/`)
+    fetch(`${import.meta.env.VITE_API_URL || 'https://portfolio-2-d45e.onrender.com/api'}/projects/`)
       .then(response => response.ok ? response.json() : Promise.reject())
       .then(data => data.length && setPortfolioProjects(data.map((item, index) => ({ number: String(index + 1).padStart(2, '0'), title: item.title, category: item.category, description: item.short_description, image: item.image, githubUrl: item.github_url, liveUrl: item.live_url, tech: item.technologies, features: item.features }))))
       .catch(() => {})
