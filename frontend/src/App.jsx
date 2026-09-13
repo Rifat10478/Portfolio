@@ -8,7 +8,7 @@ const linkedin = 'https://linkedin.com/in/islamul-haque-7394b5356/'
 function Header() {
   const [open, setOpen] = useState(false)
   const links = [['Work','work'],['About','about'],['Services','services'],['Skills','skills'],['Contact','contact']]
-  return <header><a className="logo" href="#top">RIFAT<span>.</span></a><button className="menu" onClick={()=>setOpen(!open)} aria-label="Toggle navigation">{open?'×':'☰'}</button><nav className={open?'open':''}>{links.map(([label,id])=><a onClick={()=>setOpen(false)} href={'#'+id} key={id}>{label}</a>)}<a href={github} target="_blank" rel="noreferrer">GitHub</a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn</a><a className="nav-resume" href="/resume/Rifat_CV.pdf" download>Resume ↓</a></nav></header>
+  return <header><a className="logo" href="#top">RIFAT<span>.</span></a><button className="menu" onClick={()=>setOpen(!open)} aria-label="Toggle navigation">{open?'×':'☰'}</button><nav className={open?'open':''}>{links.map(([label,id])=><a onClick={()=>setOpen(false)} href={'#'+id} key={id}>{label}</a>)}<a href={github} target="_blank" rel="noreferrer">GitHub</a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn</a><a className="nav-resume" href="/resume/Rifat.pdf" download>Resume ↓</a></nav></header>
 }
 
 function Contact() {
